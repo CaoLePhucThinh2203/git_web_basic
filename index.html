@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: rgba(15, 23, 42, 0.7);
+        --panel-light: rgba(148, 163, 184, 0.12);
+        --primary: #7c3aed;
+        --secondary: #22c55e;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --white: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background: radial-gradient(circle at top, #1e293b, var(--bg) 45%);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0 32px;
+      }
+
+      .brand {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .brand span {
+        color: #a78bfa;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        color: var(--muted);
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 48px;
+        padding: 42px 0 32px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(124, 58, 237, 0.18);
+        border: 1px solid rgba(167, 139, 250, 0.4);
+        color: #c4b5fd;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 18px 0 18px;
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 1.05;
+      }
+
+      .lead {
+        max-width: 620px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), #8b5cf6);
+        color: var(--white);
+        box-shadow: 0 10px 25px rgba(124, 58, 237, 0.35);
+      }
+
+      .btn-secondary {
+        background: rgba(148, 163, 184, 0.12);
+        color: var(--text);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+      }
+
+      .stats {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+
+      .stat {
+        min-width: 120px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.7rem;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .card {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.75));
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.4);
+      }
+
+      .dashboard {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .dashboard::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(34, 197, 94, 0.08));
+      }
+
+      .dashboard-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .mini-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        color: var(--muted);
+      }
+
+      .dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(148, 163, 184, 0.6);
+      }
+
+      .dot:nth-child(1) { background: #f87171; }
+      .dot:nth-child(2) { background: #fbbf24; }
+      .dot:nth-child(3) { background: #4ade80; }
+
+      .chart {
+        background: rgba(15, 23, 42, 0.72);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: 18px;
+        padding: 16px;
+        margin-top: 16px;
+      }
+
+      .bars {
+        display: flex;
+        align-items: end;
+        gap: 14px;
+        height: 150px;
+        padding-top: 14px;
+      }
+
+      .bar {
+        flex: 1;
+        border-radius: 10px 10px 0 0;
+        background: linear-gradient(180deg, #a78bfa, #7c3aed);
+        box-shadow: 0 10px 25px rgba(124, 58, 237, 0.25);
+      }
+
+      .bar:nth-child(2) { background: linear-gradient(180deg, #67e8f9, #0ea5e9); }
+      .bar:nth-child(3) { background: linear-gradient(180deg, #86efac, #22c55e); }
+      .bar:nth-child(4) { background: linear-gradient(180deg, #f9a8d4, #ec4899); }
+
+      .bar-1 { height: 42%; }
+      .bar-2 { height: 58%; }
+      .bar-3 { height: 75%; }
+      .bar-4 { height: 90%; }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .summary-item {
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(148, 163, 184, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+      }
+
+      .summary-item small {
+        display: block;
+        color: var(--muted);
+      }
+
+      .summary-item strong {
+        font-size: 1.2rem;
+        display: block;
+        margin-top: 6px;
+      }
+
+      .features {
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .feature {
+        padding: 24px 20px;
+        border-radius: 20px;
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+      }
+
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        margin-bottom: 14px;
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(34, 197, 94, 0.18));
+        font-size: 1.4rem;
+      }
+
+      .feature h3 {
+        margin: 0 0 10px;
+        font-size: 1.26rem;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 860px) {
+        .hero,
+        .features {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .page {
+          padding-top: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <div class="brand">Nova<span>Flow</span></div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <main class="hero">
+        <section>
+          <div class="eyebrow">Welcome aboard</div>
+          <h1>Build bigger ideas with confidence.</h1>
+          <p class="lead">
+            Create, launch, and grow faster with a platform designed for teams that want
+            beautiful work and measurable momentum.
+          </p>
+
+          <div class="actions">
+            <a href="#start" class="btn btn-primary">Get started</a>
+            <a href="#learn" class="btn btn-secondary">Learn more</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>10k+</strong>
+              <span>happy users</span>
+            </div>
+            <div class="stat">
+              <strong>99.9%</strong>
+              <span>uptime</span>
+            </div>
+            <div class="stat">
+              <strong>24/7</strong>
+              <span>support</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="card dashboard" aria-label="Preview dashboard">
+          <div class="dashboard-inner">
+            <div class="mini-header">
+              <strong>Growth overview</strong>
+              <div class="dots" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+
+            <div class="chart">
+              <div class="bars" aria-label="Sales chart">
+                <div class="bar bar-1"></div>
+                <div class="bar bar-2"></div>
+                <div class="bar bar-3"></div>
+                <div class="bar bar-4"></div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="summary-item">
+                <small>Revenue</small>
+                <strong>$84.2K</strong>
+              </div>
+              <div class="summary-item">
+                <small>Conversion</small>
+                <strong>+18.4%</strong>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section class="features" id="features">
+        <article class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Fast workflows</h3>
+          <p>Automate repetitive tasks and move from idea to execution in a fraction of the time.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">📈</div>
+          <h3>Clear insights</h3>
+          <p>Track progress with dashboards that reveal what matters and what to focus on next.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">🤝</div>
+          <h3>Built for teams</h3>
+          <p>Keep stakeholders aligned with shared spaces, updates, and collaborative tools.</p>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>
